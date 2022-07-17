@@ -38,5 +38,14 @@ function createDropdownItem(item : Email | ProductNumber) {
 emails.forEach(function (email) {
     const item = createDropdownItem(email);
     const selectTag = document.querySelector('#email-dropdown');
-    selectTag.appendChild(item);
+    selectTag?.appendChild(item);
 });
+
+
+// 인터페이스에서 제네릭을 사용하는 방법
+interface Dropdown<T> {
+    value: T;
+    selected: boolean;
+}
+const dbobj: Dropdown<string> = { value: 'abc', selected: false };
+
