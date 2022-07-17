@@ -10,8 +10,6 @@ const emails: Dropdown<string>[] = [
     { value: 'hanmail.net', selected: false },
 ];
 
-
-
 const numberOfProducts: Dropdown<number>[] = [
     { value: 1, selected: true },
     { value: 2, selected: false },
