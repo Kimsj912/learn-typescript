@@ -1,6 +1,6 @@
 interface PhoneNumberDictionary {
-  [phone: string]: {
-    num: number;
+  [phone: string]: { // 키값을 정하지 않았을때 여러가지 타입을 받을 수 있다
+    num: number; 
   };
 }
 
@@ -10,11 +10,15 @@ interface Contact {
   phones: PhoneNumberDictionary;
 }
 
+enum PhoneType {
+  home, office, studio,
+}
+
 // api
 // TODO: 아래 함수의 반환 타입을 지정해보세요.
-function fetchContacts() {
+function fetchContacts(): Promise<Contact[]> {
   // TODO: 아래 변수의 타입을 지정해보세요.
-  const contacts = [
+  const contacts: Contact[] = [
     {
       name: 'Tony',
       address: 'Malibu',
@@ -57,7 +61,7 @@ function fetchContacts() {
 // main
 class AddressBook {
   // TODO: 아래 변수의 타입을 지정해보세요.
-  contacts = [];
+  contacts: Contact[] = [];
 
   constructor() {
     this.fetchData();
@@ -70,29 +74,30 @@ class AddressBook {
   }
 
   /* TODO: 아래 함수들의 파라미터 타입과 반환 타입을 지정해보세요 */
-  findContactByName(name) {
+  findContactByName(name: string): Contact[]{
     return this.contacts.filter(contact => contact.name === name);
   }
 
-  findContactByAddress(address) {
+  findContactByAddress(address: string): Contact[] {
     return this.contacts.filter(contact => contact.address === address);
   }
 
-  findContactByPhone(phoneNumber, phoneType: string) {
+  // 제한된 문자열의 모음인 enum으로 phoneType을 제한
+  findContactByPhone(phoneNumber: number, phoneType: PhoneType): Contact[] {
     return this.contacts.filter(
       contact => contact.phones[phoneType].num === phoneNumber
     );
   }
 
-  addContact(contact) {
+  addContact(contact: Contact) {
     this.contacts.push(contact);
   }
 
-  displayListByName() {
+  displayListByName():String[] {
     return this.contacts.map(contact => contact.name);
   }
 
-  displayListByAddress() {
+  displayListByAddress(): String[] {
     return this.contacts.map(contact => contact.address);
   }
   /* ------------------------------------------------ */
